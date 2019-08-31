@@ -109,3 +109,54 @@ parser.add_argument('-t', "--threads", type=int, help="Threads => Number of Thre
 parser.add_argument('-f', "--follow", action="store_true", help="Follow => Follow & Resolve Redirects")
 parser.add_argument('-b', "--forbidden", action="store_true", help="Forbidden => Process forbidden pages")
 args = parser.parse_args()
+
+print('''
+    _             __   ___    __
+   | |           / _) / _ \  / _)
+  _| |_  _  _  __\ \ | |_| | \ \  _   _ _  _  __
+ /     \| || |/ / _ \|  _  |/ _ \| | | | || |/ /
+( (| |) ) || / ( (_) ) | | ( (_) ) |_| | || / /
+ \_   _/ \_)__/ \___/|_| |_|\___/| ._,_|\_)__/
+   | |                           | |
+   |_|                           |_|
+            by: Krampus-Nuggets
+''')
+
+if len(argv) == 1:
+    parser.print_help()
+    exit()
+
+import http.client, httplib2
+
+domain = args.url
+url = str(domain.strip())
+adminlist = [line.strip() for line in open(args.wordlist, 'r')]
+queueLock = Lock()
+workQueue = queue.Queue(len(adminlist))
+found = []
+threads = []
+exitFlag = 0
+threadID = 1
+maxthreads = 40
+
+if args.threads:
+    maxthreads = args.threads
+
+queueLock.acquire()
+for word in adminlist:
+    workQueue.put(word)
+queueLock.release()
+
+while threadID <= maxthreads:
+    tname = str("Thread-") + str(threadID)
+    thread = myThread(threadID, tname, workQueue)
+    thread.start()
+    threads.append(thread)
+    threadID += 1
+
+with Timere():
+    while not workQueue.empty():
+        pass
+    for t in threads:
+        t.join()
+    print("\r\x1b[K\n [*] All Threads Complete, " + str(len(found)) + " sites found.")
