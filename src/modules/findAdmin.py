@@ -15,3 +15,8 @@ from socket import *
 from sys import argv, stdout
 from threading import Thread, Lock
 
+def killpid(signum=0, frame=0):
+    print("\r\x1b[K")
+    os.kill(getpid(), 9)
+
+signal(SIGINT, killpid)
