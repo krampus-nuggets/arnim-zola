@@ -97,3 +97,15 @@ def getresponse(threadName, q):
                     pass
         else:
             queueLock.release()
+
+def killpid(signum=0, frame=0):
+    print("\r\x1b[K")
+    kill(getpid(), 9)
+
+parser = ArgumentParser(prog='findAdmin', usage='findAdmin [options]')
+parser.add_argument('-u', "--url", type=str, help='URL => facebook.com, google.com, etc.')
+parser.add_argument('-w', "--wordlist", type=str, help="WordList => dir/wordlist OR wordlist [Working DIR]")
+parser.add_argument('-t', "--threads", type=int, help="Threads => Number of Threads to use [Parallel Processes]")
+parser.add_argument('-f', "--follow", action="store_true", help="Follow => Follow & Resolve Redirects")
+parser.add_argument('-b', "--forbidden", action="store_true", help="Forbidden => Process forbidden pages")
+args = parser.parse_args()
