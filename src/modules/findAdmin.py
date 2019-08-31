@@ -20,3 +20,13 @@ def killpid(signum=0, frame=0):
     os.kill(getpid(), 9)
 
 signal(SIGINT, killpid)
+
+class myThread(Thread):
+    def __init__(self, threadID, name, q):
+        Thread.__init__(self)
+        self.ThreadID = threadID
+        self.name = name
+        self.q = q
+
+    def run(self):
+        getresponse(self.name, self.q)
