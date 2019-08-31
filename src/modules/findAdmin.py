@@ -109,3 +109,15 @@ parser.add_argument('-t', "--threads", type=int, help="Threads => Number of Thre
 parser.add_argument('-f', "--follow", action="store_true", help="Follow => Follow & Resolve Redirects")
 parser.add_argument('-b', "--forbidden", action="store_true", help="Forbidden => Process forbidden pages")
 args = parser.parse_args()
+
+print('''
+    _             __   ___    __
+   | |           / _) / _ \  / _)
+  _| |_  _  _  __\ \ | |_| | \ \  _   _ _  _  __
+ /     \| || |/ / _ \|  _  |/ _ \| | | | || |/ /
+( (| |) ) || / ( (_) ) | | ( (_) ) |_| | || / /
+ \_   _/ \_)__/ \___/|_| |_|\___/| ._,_|\_)__/
+   | |                           | |
+   |_|                           |_|
+            by: Krampus-Nuggets
+''')
