@@ -50,3 +50,8 @@ class Timer:
         maked = "rm -rf .cache_httplib"
         process = subprocess.Popen(maked.split(), stdout=subprocess.PIPE)
         poutput = process.communicate()[0]
+
+class Printer:
+    def __init__(self, data):
+        stdout.write("\r\x1b[K" + data.__str__())
+        stdout.flush()
