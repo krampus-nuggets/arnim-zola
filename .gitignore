@@ -1,0 +1,8 @@
+*.py[cod]
+*.so
+build
+test
+MANIFEST
+dist/
+OG/
+.idea/
