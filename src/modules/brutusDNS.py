@@ -61,3 +61,33 @@ def writeOut(state):
         print("\n  [*] Processes Aborted - " + str(progdone) + " Lookups Completed & " + str(len(found)) + "Sub-Domains found.")
     print(" [*] Results saved to logs/" + domain + ".log")
 
+def processData(threadName, q):
+    while not exitFlag:
+        queueLock.acquire()
+        if not workQueue.empty():
+            data = q.get()
+            queueLock.release()
+            host = data.strip() + "." + domain.strip()
+            try:
+                answers = resolver.query(host)
+                try:
+                    output = gethostbyaddr(host)
+                    if len(host) < 16:
+                        stdout.write("\r\x1b[K")
+                        stdout.flush()
+                        print("\r" + str(host) + "\t\t" + str(output[0]) + " " + str(output[2]))
+                        found.append(str(host) + "\t\t" + str(output[0]) + " " + str(output[2]))
+                    else:
+                        stdout.write("\r\x1b[K")
+                        stdout.flush()
+                        print("\r" + str(host) + "\t" + str(output[0]) + " " + str(output[2]))
+                except:
+                    stdout.write("\r\x1b[K")
+                    stdout.flush()
+                    print("\r" + str(host))
+                    found.append(str(host))
+            except:
+                pass
+        else:
+            queueLock.release()
+
