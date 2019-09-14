@@ -33,6 +33,11 @@ class arnimThread(Thread):
 
 class arnimPrinter:
     def __init__(self, data):
+        stdout.write("\r\x1b[K" + data.__str__())
+        stdout.flush()
+
+class Timer:
+    def __init__(self, data):
         self.start = arnimTime.time()
 
     def __exit__( self, *args ):
