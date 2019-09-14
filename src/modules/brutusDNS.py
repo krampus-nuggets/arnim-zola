@@ -164,7 +164,7 @@ with Timer():
         if progress >= countProg:
             progComplete = len(subdomains) - workQueue.qsize()
             token = arnimTime.time() - countStart
-            rate = rount(progComplete / token, 2)
+            rate = round(progComplete / token, 2)
             percent = round(float(100.00) / len(subdomains) * progComplete, 2)
             eta = round(token / percent * 100 - token, 2)
             outputPrint = " [*] " + str(percent) + "% Complete, " + str(progComplete) + "/" + str(len(subdomains)) + " lookups at " + str(rate) + " lookups/second. ETA: " + str(arnimTime.strftime("%H:%M:%S", arnimTime.gmtime(eta)))
