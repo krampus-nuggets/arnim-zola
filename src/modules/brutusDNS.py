@@ -13,11 +13,13 @@ import gzip
 import json
 import time as arnimTime
 
-def killpid(signum=0, frame=0):
+maxThreads = 500
+
+def killPID(signum=0, frame=0):
     print("\r\x1b[K")
     os.kill(os.getpid(), 9)
 
-signal(SIGINT, killpid)
+signal(SIGINT, killPID)
 
 class arnimThread(Thread):
     def __init__(self, threadID, name, e):
