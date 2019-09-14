@@ -22,11 +22,11 @@ def killPID(signum=0, frame=0):
 signal(SIGINT, killPID)
 
 class arnimThread(Thread):
-    def __init__(self, threadID, name, e):
+    def __init__(self, threadID, name, q):
         Thread.__init__(self)
         self.threadID = threadID
         self.name = name
-        self.e = q
+        self.q = q
 
     def run(self):
         process_data(self.name, self.q)
