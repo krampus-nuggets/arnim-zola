@@ -84,6 +84,7 @@ def processData(threadName, q):
                         stdout.write("\r\x1b[K")
                         stdout.flush()
                         print("\r" + str(host) + "\t" + str(output[0]) + " " + str(output[2]))
+                        found.append(str(host) + "\t\t" + str(output[0]) + " " + str(output[2]))
                 except:
                     stdout.write("\r\x1b[K")
                     stdout.flush()
