@@ -47,7 +47,7 @@ class arnimPrinter:
         else:
             print(" [*] Time Elapsed - " + str(sec) + " seconds at " + str(round(len(subdomains) / taken, 2)) + " lookups per second.")
 
-def killpid():
-    writeout("bad")
+def killPID():
+    writeOut("bad")
     kill(getpid(), 9)
 
