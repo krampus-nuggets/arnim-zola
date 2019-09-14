@@ -51,3 +51,13 @@ def killPID():
     writeOut("bad")
     kill(getpid(), 9)
 
+def writeOut(state):
+    logfile = open("logs/" + domain + ".log", "w")
+    for item in found:
+        logfile.write("%s\n" % item)
+    if state == "good":
+        print("\n [*] Processes complete - " + str(len(found)) + " Sub-Domains found.")
+    else:
+        print("\n  [*] Processes Aborted - " + str(progdone) + " Lookups Completed & " + str(len(found)) + "Sub-Domains found.")
+    print(" [*] Results saved to logs/" + domain + ".log")
+
