@@ -29,3 +29,23 @@ class arnimThread(Thread):
     def run(self):
         process_data(self.name, self.q)
 
+class arnimPrinter:
+    def __init__(self, data):
+        self.start = arnimTime.time()
+
+    def __exit__( self, *args ):
+        sec = int(arnimTime.strftime('%S', arnimTime.gmtime(taken)))
+        min = int(arnimTime.strftime('%M', arnimTime.gmtime(taken)))
+        hour = int(arnimTime.strftime('%H', arnimTime.gmtime(taken)))
+        if min > 0:
+            if hour > 0:
+                print(" [*] Time Elapsed - " + str(hour) + " hours, " + str(min) + " minutes and " + str(sec) + " seconds at " + str(round(len(subdomains) / taken, 2)) + " lookups per second.")
+            else:
+                print(" [*] Time Elapsed - " + str(min) + " minutes and " + str(sec) + " seconds at " + str(round(len(subdomains) / taken, 2)) + " lookups per second.")
+        else:
+            print(" [*] Time Elapsed - " + str(sec) + " seconds at " + str(round(len(subdomains) / taken, 2)) + " lookups per second.")
+
+def killpid():
+    writeout("bad")
+    kill(getpid(), 9)
+
