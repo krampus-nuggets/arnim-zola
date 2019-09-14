@@ -14,12 +14,11 @@ import json
 import time as arnimTime
 
 maxThreads = 500
-
-def killPID(signum=0, frame=0):
+def killpid(signum=0, frame=0):
     print("\r\x1b[K")
     os.kill(os.getpid(), 9)
 
-signal(SIGINT, killPID)
+signal(SIGINT, killpid)
 
 class arnimThread(Thread):
     def __init__(self, threadID, name, q):
@@ -52,7 +51,7 @@ class Timer:
         else:
             print(" [*] Time Elapsed - " + str(sec) + " seconds at " + str(round(len(subdomains) / taken, 2)) + " lookups per second.")
 
-def killPID():
+def killpid():
     writeOut("bad")
     kill(getpid(), 9)
 
@@ -114,5 +113,6 @@ serversDNS = ["8.8.8.8", "8.8.4.4", "4.2.2.1", "4.2.2.2", "4.2.2.3", "4.2.2.4", 
               "4.2.49.4", "4.2.49.3", "4.2.49.2", "209.244.0.3", "209.244.0.4", "208.67.222.222", "208.67.220.220",
               "192.121.86.114", "192.121.121.14", "216.111.65.217", "192.76.85.133", "151.202.0.85"]
 
-signal(SIGINT, killPID)
+signal(SIGINT, killpid)
+
 
