@@ -154,7 +154,7 @@ while threadID <= maxthreads:
     threads.append(thread)
     threadID += 1
 
-with Timere():
+with Timer():
     while not workQueue.empty():
         pass
     for t in threads:
