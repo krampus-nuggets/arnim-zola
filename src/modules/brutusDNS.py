@@ -27,7 +27,7 @@ class arnimThread(Thread):
         self.q = q
 
     def run(self):
-        process_data(self.name, self.q)
+        processData(self.name, self.q)
 
 class arnimPrinter:
     def __init__(self, data):
