@@ -13,7 +13,6 @@ import gzip
 import json
 import time as arnimTime
 
-maxThreads = 500
 def killpid(signum=0, frame=0):
     print("\r\x1b[K")
     os.kill(os.getpid(), 9)
@@ -105,6 +104,8 @@ args = zolaParser.parse_args()
 if len(argv) == 1:
     zolaParser.print_help()
     exit()
+
+maxThreads = 500
 
 if args.threads:
     maxThreads = args.threads
