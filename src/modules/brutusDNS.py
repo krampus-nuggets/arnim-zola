@@ -117,4 +117,67 @@ serversDNS = ["8.8.8.8", "8.8.4.4", "4.2.2.1", "4.2.2.2", "4.2.2.3", "4.2.2.4", 
 
 signal(SIGINT, killpid)
 
+domain = args.url
+logDIR = "mkdir -p logs"
+process = subprocess.Popen(logDIR.split(), stdout=subprocess.PIPE)
+procOut = process.communicate()[0]
+subdomains = [line.strip() for line in open(args.wordlist, "r")]
+if args.att:
+    with gzip.GzipFile(open("resources/DNSCached.txt.gz"), "r") as CacheClose:
+        bytesJSON = CacheClose.read()
+        stringJSON = bytesJSON.decode("utf-8")
+        data = json.loads(stringJSON)
+        serversDNS = data
 
+resolverDNS = dns.resolver.Resolver()
+resolverDNS.nameservers = serversDNS
+queueLock = Lock()
+workQueue = Queue(len(subdomains))
+found = []
+threads = []
+exitFlag = 0
+threadID = 1
+
+print("[*] Starten von " + str(maxThreads) + " zu verarbeitenden Threads und " + str(len(subdomains)) + " Unterdomänen.\n")
+
+queueLock.acquire()
+
+for work in subdomains:
+    workQueue.put(work)
+
+queueLock.release()
+
+while threadID <= maxThreads:
+    tName = str("Thread-") + str(threadID)
+    thread = arnimThread(threadID, tName, workQueue)
+    thread.start()
+    threads.append(thread)
+    threadID += 1
+
+countStart = arnimTime.time()
+arnimStart = arnimTime.time()
+
+with Timer():
+    while not workQueue.empty():
+        countProg = 0.3
+        progress = arnimTime.time() - arnimStart
+        if progress >= countProg:
+            progComplete = len(subdomains) - workQueue.qsize()
+            token = arnimTime.time() - countStart
+            rate = rount(progComplete / token, 2)
+            percent = round(float(100.00) / len(subdomains) * progComplete, 2)
+            eta = round(token / percent * 100 - token, 2)
+            outputPrint = " [*] " + str(percent) + "% Complete, " + str(progComplete) + "/" + str(len(subdomains)) + " lookups at " + str(rate) + " lookups/second. ETA: " + str(arnimTime.strftime("%H:%M:%S", arnimTime.gmtime(eta)))
+            arnimPrinter(outputPrint)
+            startProg = arnimTime.time()
+        else:
+            pass
+
+    taken = arnimTime.time() - countStart
+    stdout.write("\r\x1b[K")
+    stdout.flush()
+
+    for e in threads:
+        e.join()
+
+    writeOut("gut. Alle möglichen DNS-Server aufgelöst.")
