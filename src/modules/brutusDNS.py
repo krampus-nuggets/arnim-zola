@@ -91,3 +91,10 @@ def processData(threadName, q):
         else:
             queueLock.release()
 
+zolaParser = argparse.ArgumentParser(prog="brutusDNS", usage="brutusDNS [options]")
+zolaParser.add_argument("-u", "--url", type=str, help="eg. --url google.com")
+zolaParser.add_argument("-w", "--wordlist", type=str, help="eg. --wordlist /root/BitchBeGone.txt")
+zolaParser.add_argument("-t", "--threads", type=int, help="eg. --threads 10 | Amount of threads to use -_-")
+zolaParser.add_argument("-a", "--att", type=str, help="Add additional attributes")
+args = zolaParser.parse_args()
+
