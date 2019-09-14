@@ -35,13 +35,13 @@ class arnimPrinter:
         stdout.flush()
 
 class Timer:
-    def __init__(self, data):
+    def __enter__(self):
         self.start = arnimTime.time()
 
-    def __exit__( self, *args ):
-        sec = int(arnimTime.strftime('%S', arnimTime.gmtime(taken)))
-        min = int(arnimTime.strftime('%M', arnimTime.gmtime(taken)))
-        hour = int(arnimTime.strftime('%H', arnimTime.gmtime(taken)))
+    def __exit__(self, *args):
+        sec = int(arnimTime.strftime("%S", arnimTime.gmtime(taken)))
+        min = int(arnimTime.strftime("%M", arnimTime.gmtime(taken)))
+        hour = int(arnimTime.strftime("%H", arnimTime.gmtime(taken)))
         if min > 0:
             if hour > 0:
                 print(" [*] Time Elapsed - " + str(hour) + " hours, " + str(min) + " minutes and " + str(sec) + " seconds at " + str(round(len(subdomains) / taken, 2)) + " lookups per second.")
