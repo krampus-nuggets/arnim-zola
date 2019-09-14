@@ -11,8 +11,8 @@ from queue import Queue
 import argparse
 import gzip
 import json
-import time
+import time as arnimTime
 
 def killpid(signum=0, frame=0):
-    print( "\r\x1b[K" )
+    print("\r\x1b[K")
     os.kill(os.getpid(), 9)
