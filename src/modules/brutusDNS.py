@@ -98,3 +98,10 @@ zolaParser.add_argument("-t", "--threads", type=int, help="eg. --threads 10 | Am
 zolaParser.add_argument("-a", "--att", type=str, help="Add additional attributes")
 args = zolaParser.parse_args()
 
+if len(argv) == 1:
+    zolaParser.print_help()
+    exit()
+
+if args.threads:
+    maxThreads = args.threads
+
