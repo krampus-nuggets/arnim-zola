@@ -61,7 +61,7 @@ def writeOut(state):
     if state == "good":
         print("\n [*] Processes complete - " + str(len(found)) + " Sub-Domains found.")
     else:
-        print("\n  [*] Processes Aborted - " + str(progdone) + " Lookups Completed & " + str(len(found)) + "Sub-Domains found.")
+        print("\n  [*] Processes Aborted - " + str(progComplete) + " Lookups Completed & " + str(len(found)) + "Sub-Domains found.")
     print(" [*] Results saved to logs/" + domain + ".log")
 
 def processData(threadName, q):
