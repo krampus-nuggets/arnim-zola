@@ -12,3 +12,7 @@ import argparse
 import gzip
 import json
 import time
+
+def killpid(signum=0, frame=0):
+    print( "\r\x1b[K" )
+    os.kill(os.getpid(), 9)
