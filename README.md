@@ -1,5 +1,5 @@
 # Arnim Zola
-> Arnim Zola is or rather will be a Penetration Testing Toolkit. *It is still under development.* The project is purely written in Python v3 and will be scoped towards Network Security as an Offensive Testing Platform.
+> Arnim Zola is or rather will be a Penetration Testing Toolkit. <u>*It is still under development.*</u> The project is purely written in Python v3 and will be scoped towards Network Security as an Offensive Testing Platform.
 
 ## Completed Modules
 
